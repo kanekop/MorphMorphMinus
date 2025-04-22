@@ -1,3 +1,4 @@
+
 import streamlit as st
 import cv2
 import numpy as np
@@ -5,20 +6,20 @@ from morph import morph_faces
 
 st.title("Face Morphing Demo")
 
- img1 = st.file_uploader("元画像", type=["jpg","png"])
- img2 = st.file_uploader("変換先画像", type=["jpg","png"])
- alpha = st.slider("フェード度合い", 0.0, 1.0, 0.5)
+img1 = st.file_uploader("元画像", type=["jpg","png"])
+img2 = st.file_uploader("変換先画像", type=["jpg","png"])
+alpha = st.slider("フェード度合い", 0.0, 1.0, 0.5)
 
- if img1 and img2:
-     # --- ① アップロード → OpenCV画像変換 （省略） ---
-     bytes1 = img1.read()
-     bytes2 = img2.read()
-     arr1 = np.frombuffer(bytes1, np.uint8)
-     arr2 = np.frombuffer(bytes2, np.uint8)
-     img1_array = cv2.imdecode(arr1, cv2.IMREAD_COLOR)
-     img2_array = cv2.imdecode(arr2, cv2.IMREAD_COLOR)
-     h, w = img2_array.shape[:2]
-     img1_array = cv2.resize(img1_array, (w, h))
+if img1 and img2:
+    # --- ① アップロード → OpenCV画像変換 （省略） ---
+    bytes1 = img1.read()
+    bytes2 = img2.read()
+    arr1 = np.frombuffer(bytes1, np.uint8)
+    arr2 = np.frombuffer(bytes2, np.uint8)
+    img1_array = cv2.imdecode(arr1, cv2.IMREAD_COLOR)
+    img2_array = cv2.imdecode(arr2, cv2.IMREAD_COLOR)
+    h, w = img2_array.shape[:2]
+    img1_array = cv2.resize(img1_array, (w, h))
 
     # ② 連番フレーム生成 → 動画化 ← ここ！  
     frame_count = 30  # 例：30フレーム  
