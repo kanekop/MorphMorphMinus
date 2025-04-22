@@ -31,7 +31,7 @@ if img1 and img2:
 
     # A) Streamlit上でアニメーションとして表示する場合  
     rgb_frames = [cv2.cvtColor(f, cv2.COLOR_BGR2RGB) for f in frames]
-    st.image(rgb_frames, format="PNG", use_column_width=True)
+    st.image(rgb_frames, use_column_width=True)
 
     # B) MP4に書き出して再生したい場合  
     # writer = cv2.VideoWriter("morph.mp4", cv2.VideoWriter_fourcc(*"mp4v"),24, (w, h))
