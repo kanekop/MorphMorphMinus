@@ -1,4 +1,3 @@
-
 import streamlit as st
 import cv2
 import numpy as np
@@ -11,31 +10,25 @@ img2 = st.file_uploader("変換先画像", type=["jpg","png"])
 alpha = st.slider("フェード度合い", 0.0, 1.0, 0.5)
 
 if img1 and img2:
-    # --- ① アップロード → OpenCV画像変換 （省略） ---
+    # 1) アップロード → OpenCV 画像
     bytes1 = img1.read()
     bytes2 = img2.read()
     arr1 = np.frombuffer(bytes1, np.uint8)
     arr2 = np.frombuffer(bytes2, np.uint8)
     img1_array = cv2.imdecode(arr1, cv2.IMREAD_COLOR)
     img2_array = cv2.imdecode(arr2, cv2.IMREAD_COLOR)
-    h, w = img2_array.shape[:2]
-    img1_array = cv2.resize(img1_array, (w, h))
 
-    # ② 連番フレーム生成 → 動画化 ← ここ！  
-    frame_count = 30  # 例：30フレーム  
-    frames = []
-    for i in range(frame_count):
-        a = i / (frame_count - 1)
-        f = morph_faces(img1_array, img2_array, a)
-        frames.append(f)
+    # 2) サイズを揃える（任意）
+    h2, w2 = img2_array.shape[:2]
+    img1_array = cv2.resize(img1_array, (w2, h2))
 
-    # A) Streamlit上でアニメーションとして表示する場合  
-    rgb_frames = [cv2.cvtColor(f, cv2.COLOR_BGR2RGB) for f in frames]
-    st.image(rgb_frames, use_column_width=True)
+    # 3) モーフィング実行
+    try:
+        with st.spinner("Morphing..."):
+            result = morph_faces(img1_array, img2_array, alpha)
+        # OpenCV は BGR なので、Streamlit に渡す際は RGB に変換しても OK
+        result_rgb = cv2.cvtColor(result, cv2.COLOR_BGR2RGB)
+        st.image(result_rgb, caption="Morph Result", use_column_width=True)
+    except RuntimeError as e:
+        st.error(f"Error: {e}")
 
-    # B) MP4に書き出して再生したい場合  
-    # writer = cv2.VideoWriter("morph.mp4", cv2.VideoWriter_fourcc(*"mp4v"),24, (w, h))
-    # for f in frames:
-    #     writer.write(f)
-    # writer.release()
-    # st.video("morph.mp4")
