@@ -78,5 +78,4 @@ The application runs on port 5000 and is configured for deployment on Replit.
 This project is part of a Replit implementation.
 
 ## Authors
-
-Created as a Face Morphing Demo project on Replit.
+Yoshimune Kaneko (@kanekop) – initial concept & development
