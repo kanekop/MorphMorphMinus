@@ -1,81 +1,104 @@
 
-# Face Morphing Demo
+# Face Morphing Demo / 顔画像モーフィングデモ
 
-A Streamlit-based web application that performs face morphing between two images using facial landmarks detection and triangulation.
+画像間で顔の特徴点を検出し、自然な変形アニメーションを生成するStreamlitウェブアプリケーション。
+A Streamlit web application that generates natural face morphing animations by detecting facial landmarks between images.
 
-## Features
+## デモ / Demo
 
-- Upload two images for morphing
-- Real-time morphing preview
-- Adjustable morphing intensity using a slider
-- Local image processing (no external API calls)
-- Secure file handling
+![Face Morphing Demo](attached_assets/image_1745303792519.png)
 
-## Technical Stack
+## 特徴 / Features
+
+- 2枚の画像間でリアルタイムモーフィング
+- MediaPipe Face Meshによる高精度な顔特徴点検出
+- スライダーによる変形度合いの調整
+- ローカル処理による安全な画像処理
+- エラーハンドリングによる安定動作
+
+## 技術仕様 / Technical Specifications
 
 - **Python 3.10**
-- **Streamlit**: Web interface
-- **OpenCV**: Image processing
-- **MediaPipe**: Facial landmark detection
-- **NumPy**: Numerical computations
+- **Streamlit**: インターフェース構築
+- **OpenCV**: 画像処理エンジン
+- **MediaPipe**: 顔特徴点検出
+- **NumPy**: 数値計算処理
 
-## How It Works
+### 処理の流れ / Process Flow
 
-1. **Face Detection**: Uses MediaPipe Face Mesh to detect facial landmarks in both images
-2. **Triangulation**: Applies Delaunay triangulation to create corresponding triangles
-3. **Warping**: Performs piece-wise affine transformation on triangles
-4. **Blending**: Cross-dissolves between warped images
+1. **顔検出**: MediaPipe Face Meshで両画像の特徴点を検出
+2. **三角形分割**: Delaunay分割で対応点を三角形化
+3. **変形処理**: 三角形ごとにアフィン変換を適用
+4. **ブレンド**: 変形画像間をクロスディゾルブ
 
-## Installation
+## インストール / Installation
 
-The project uses Poetry for dependency management. All required packages are specified in `pyproject.toml`:
+Poetry による依存関係管理:
 
+```bash
+# Poetryがインストール済みの場合
+poetry install
+```
+
+必要なパッケージ:
 - streamlit
 - opencv-python
 - mediapipe
 - numpy
 
-## Usage
+## 使い方 / Usage
 
-1. Click the Run button to start the Streamlit server
-2. Upload two images using the file uploaders:
-   - "元画像" (Source image)
-   - "変換先画像" (Target image)
-3. Adjust the "フェード度合い" (Fade amount) slider
-4. The morphed result will display automatically
+1. Replitの実行ボタンをクリックしてサーバーを起動
+2. 画像をアップロード:
+   - "元画像": 変形元の画像
+   - "変換先画像": 変形先の画像
+3. "フェード度合い"スライダーで変形強度を調整
+4. 結果が自動的に表示されます
 
-## Project Structure
+## 制限事項 / Limitations
 
-```
-├── main.py           # Streamlit interface
-├── morph.py         # Core morphing functions
-├── security.md      # Security documentation
-└── pyproject.toml   # Dependencies
-```
+- 画像には1つの顔のみが含まれている必要があります
+- 推奨画像サイズ: 512x512 ピクセル以上
+- サポート形式: JPG, PNG
 
-## Security
+## エラー対処 / Troubleshooting
 
-- No API keys or sensitive data required
-- Local image processing
-- Secure file uploads via Streamlit
-- No external service dependencies
+- "No face detected": 画像から顔を検出できない場合
+  → 明るい画像で、顔が正面を向いているものを使用してください
+- "Image processing error": 画像処理エラー
+  → 画像サイズを確認し、必要に応じて再アップロードしてください
 
-For detailed security information, see `security.md`.
+## 開発環境 / Development
 
-## Error Handling
+- Replit上で開発・デプロイ
+- ポート5000でサービス提供
+- デバッグモード: `streamlit run main.py --debug`
 
-The application includes error handling for:
-- Face detection failures
-- Image processing errors
-- File upload issues
+## 貢献方法 / Contributing
 
-## Development
+1. Replitでフォーク
+2. 機能追加やバグ修正を実装
+3. プルリクエストを送信
 
-The application runs on port 5000 and is configured for deployment on Replit.
+## セキュリティ / Security
 
-## License
+詳細は `security.md` を参照してください。
+- ローカル画像処理
+- API キー不要
+- セキュアなファイルアップロード
 
-This project is part of a Replit implementation.
+## ライセンス / License
 
-## Authors
-Yoshimune Kaneko (@kanekop) – initial concept & development
+本プロジェクトはReplit実装の一部として提供されています。
+
+## 作者 / Author
+
+金子 良宗 (@kanekop) – 初期実装と開発
+
+## 謝辞 / Acknowledgments
+
+- MediaPipe - 顔特徴点検出
+- OpenCV - 画像処理機能
+- Streamlit - Web UI構築
+- NumPy - 数値計算処理
+
