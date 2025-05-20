@@ -202,5 +202,5 @@ def morph\_faces(img1: np.ndarray, img2: np.ndarray, alpha: float \= 0.5,
 
 | 日付 | 変更 | 著者 |
 | ----- | ----- | ----- |
-| 2025‑05‑20 | 初版作成 | ChatGPT |
+| 2025‑05‑20 | 初版作成 | Yoshimune Kaneko |
 
