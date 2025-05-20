@@ -53,19 +53,20 @@
 
 ### **9.1 ディレクトリ／ファイル構成 (決定版)**
 
-.  
-├── app/                \# Python パッケージ化を想定  
-│   ├── \_\_init\_\_.py  
-│   ├── main.py         \# Streamlit UI (エントリーポイント)  
-│   ├── morph.py        \# 画像処理ロジック  
-│   └── utils.py        \# 汎用 I/O・前処理ヘルパー  
-├── tests/              \# pytest テスト  
-│   ├── test\_morph.py  
-│   └── data/  
-│       ├── face1.jpg   \# サンプル画像 (著作権クリア済み)  
-│       └── face2.jpg  
-├── pyproject.toml      \# Poetry 管理  
-└── README.md           \# 環境構築 & 使い方
+.
+├── .config/            # 設定ファイル
+│   └── matplotlib/     
+├── .streamlit/         # Streamlit設定
+│   └── config.toml
+├── attached_assets/    # アセット画像
+│   └── image_1745303792519.png
+├── main.py            # Streamlit UI (エントリーポイント)
+├── morph.py           # 画像処理ロジック
+├── pyproject.toml     # Poetry 依存関係管理
+├── poetry.lock        # Poetry ロックファイル
+├── README.md          # 環境構築 & 使い方
+├── security.md        # セキュリティ情報
+└── TechSpecSheet.md   # 技術仕様書
 
 * `app/__init__.py` で `from .main import run` をエクスポートすると CLI で `python -m app` が可能。
 
