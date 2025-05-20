@@ -31,6 +31,26 @@ A Streamlit web application that generates natural face morphing animations by d
 3. **変形処理**: 三角形ごとにアフィン変換を適用
 4. **ブレンド**: 変形画像間をクロスディゾルブ
 
+## ディレクトリ構造 / Directory Structure
+
+```
+.
+├── .config/
+│   └── matplotlib/
+├── .streamlit/
+│   └── config.toml
+├── attached_assets/
+│   └── image_1745303792519.png
+├── docs/
+│   ├── FaceVectorLab-Streamlit.md
+│   └── TechSpecSheet.md
+├── main.py            # Streamlit UI
+├── morph.py          # 画像処理ロジック
+├── pyproject.toml    # Poetry設定
+└── README.md         # 本ドキュメント
+
+```
+
 ## インストール / Installation
 
 Poetry による依存関係管理:
